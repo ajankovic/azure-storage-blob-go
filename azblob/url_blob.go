@@ -199,6 +199,11 @@ func (b BlobURL) SetAccessControl(ctx context.Context, timeout *int32, leaseID *
 	return b.blobClient.SetAccessControl(ctx, timeout, leaseID, owner, group, posixPermissions, posixACL, ifMatch, ifNoneMatch, ifModifiedSince, ifUnmodifiedSince, requestID)
 }
 
+//GetAccessControl gets the owner, group, permission and access control for a blob. Valid on hns accounts only
+func (b BlobURL) GetAccessControl(ctx context.Context, timeout *int32, upn *bool, leaseID *string, _ *string, _ *string, ifModifiedSince *time.Time, ifUnmodifiedSince *time.Time, requestID *string) (*BlobGetAccessControlResponse, error) {
+	return b.blobClient.GetAccessControl(ctx, timeout, upn, leaseID, nil, nil, ifModifiedSince, ifUnmodifiedSince, requestID)
+}
+
 // LeaseBreakNaturally tells ContainerURL's or BlobURL's BreakLease method to break the lease using service semantics.
 const LeaseBreakNaturally = -1
 
